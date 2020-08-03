@@ -1,0 +1,400 @@
+.test-ride {
+  width: 100%;
+  box-shadow: 5px 0 20px 0 rgba(#000, 0.6);
+  background: #d9142b;
+  min-height: 100vh;
+  padding-bottom: 60px;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: auto 1fr;
+  justify-content: space-evenly;
+  visibility: hidden;
+  @media(min-width: 1024px) {
+    padding-left: 200px;
+    padding-bottom: 0;
+    min-height: 100vh;
+  }
+  &__header {
+    padding: 20px 0 20px 20px;
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  &__main {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    @media(min-width: 768px) {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+    }
+    @media(min-width: 1024px) {
+      grid-template-columns: 75% 25%;
+      grid-template-rows: auto;
+    }
+    @media(min-width: 1280px) {
+      grid-template-columns: 65% 35%;
+      grid-template-rows: auto;
+    }
+  }
+  &__form-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    justify-items: center;
+    row-gap: 40px;
+    padding: 20px;
+    overflow: hidden;
+    @media(min-width: 768px) {
+      row-gap: 0;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+  }
+  &__form {
+    position: relative;
+    width: 100%;
+    padding: 20px 30px;
+      border-radius: 10px;
+      background: #d9142b;
+      display: flex;
+      flex-direction: column;
+      box-shadow:  10px 10px 20px #b81125, 
+              -10px -10px 20px #fa1731;
+      @media(min-width: 768px) {
+        width: 85%;
+      }
+      @media(min-width: 1024px) {
+        width: 90%;
+      }        
+      @media(min-width: 1280px) {
+        width: 85%;
+      }
+  }
+  &__form-header {
+    font-size: 1.8rem;
+    text-align: center;
+    color: #fff;
+  } 
+  &__inputBox {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    &--textarea {
+      height: 160px;
+      @media(min-width: 768px) {
+        flex-grow: 1;
+      }
+    }
+  }
+  &__label {
+    font-size: 1.6rem;
+    margin-bottom: 5px;
+    color: #fff;
+  }
+  &__input {
+    background: #d9142b;
+    border:none;
+    outline: none;
+    color: #fff;
+    padding: 0 10px;
+    line-height: 36px;
+    font-size: 1.6rem;
+    border-radius: 10px;
+    box-sizing: border-box;
+    margin:0;
+    box-shadow: inset 3px 3px 6px #b81125, 
+            inset -3px -3px 6px #fa1731;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+  }
+  &__textarea {
+    border:none;
+    outline: none;
+    width: 100%;
+    background: #d9142b;
+    color: #fff;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-size: 1.6rem;
+    flex-grow:1;
+    resize: none;
+    box-shadow: inset 3px 3px 6px #b81125, 
+            inset -3px -3px 6px #fa1731;
+    &::placeholder {
+      font-size: 1.2rem;
+      color: rgba(#fff,0.75);
+    }
+  }
+  &__list-header{
+    font-size: 1.6rem;
+    color: #fff;
+    font-weight: normal;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  &__list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    justify-content: space-between;
+  }
+  &__list-item {
+    width: 100%;
+    margin-bottom:20px;
+    &.body {
+      width: 42.5%;
+    }
+  }
+  &__list-element {
+    position: relative;
+    width: 100%;
+    display: block;
+  }
+  &__input-checkbox {
+    position: absolute;
+    opacity:0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    pointer-events: visible !important;
+    &:checked ~ .test-ride__list-text {
+      box-shadow: inset 5px 5px 10px #b81125, 
+      inset -5px -5px 10px #fa1731;
+      font-size: 1.7rem;
+    }
+    &:checked ~ .test-ride__list-text.body {
+      font-size: 1.5rem;
+    }
+  }
+  &__list-text {
+    width: 100%;
+    height: 45px;
+    font-size: 1.8rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow:  5px 5px 10px #b81125, 
+             -5px -5px 10px #fa1731;
+    &.body {
+      font-size: 1.6rem;
+    }
+  }
+  &__submit {
+    width: 80%;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    padding: 10px 0;
+    font-size: 2rem;
+    color: #fff;
+    letter-spacing: 1px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background-color: #d9142b;
+    align-self: center;
+    box-shadow:  5px 5px 10px #b81125, 
+    -5px -5px 10px #fa1731;
+    &:active {
+      box-shadow: inset 5px 5px 10px #b81125, 
+      inset -5px -5px 10px #fa1731;
+      font-size: 1.9rem;
+    }
+    @media(min-width: 1024px) {
+      margin-bottom: 0;
+    }
+  }
+  &__aside {
+    display: flex;
+    justify-content: center;
+    @media(min-width: 1024px) {
+      flex-direction: column;
+    }
+  }
+  &__chosen-model-container{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    width: 50%;
+    position: relative;
+    @media(min-width: 1024px) {
+      width: auto;
+      height: 10%;
+      display: block;
+      align-items: normal;
+    }
+    @media(min-width: 1280px) {
+      height: 20%;
+    }
+    @media(min-width: 1280px) and (min-height: 900px) {
+      height: 15%;
+    }
+  }
+  &__chosen-image-container {
+    height: 100%;
+    width: 50%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    @media(min-width: 1024px) {
+      height: 45%;
+      width: auto;
+      align-items: flex-start;
+    }
+    @media(min-width: 1280px) {
+      align-items: flex-end;
+    }
+    @media(min-width: 1280px) and (min-height: 900px) {
+      height: 37.5%;
+    }
+  }
+  &__chosen-image{
+    position: absolute;
+    height: 125%;
+    margin-left: -10%;
+    margin-top:-5%;
+    color:#fff;
+    transform: translateX(100%);
+    &.aventador {
+      height: 120%;
+      margin-top: -7.5%;
+      margin-left: 0;
+    }
+    &.gallardo {
+      height: 110%;
+    }
+   &.murcielago {
+     margin-top: 4%;
+     margin-left: 0;
+   }
+   &.urus {
+     height: 105%;
+   }
+   @media(min-width: 1024px) {
+     height: 60%;
+     margin-top: -25%;
+     &.aventador {
+       margin-top: -27.5%;
+       height: 60%;
+     }
+     &.gallardo {
+       height: 50%;
+       margin-top: -10%;
+     }
+     &.murcielago {
+       margin-top: -15%;
+     }
+     &.urus {
+       height: 55%;
+       margin-top: -15%;
+     }
+   }
+   @media(min-width: 1280px) {
+     margin-top: -20%;
+     height: 115%;
+     &.aventador {
+       margin-top: -25%;
+       height: 110%;
+     }
+     &.murcielago {
+       margin-top: -7.5%;
+     }
+     &.gallardo {
+       height: 100%;
+       margin-left: -5%;
+       margin-top: -20%;
+     }
+     &.urus {
+       height: 100%;
+       margin-top: -20%;
+     }
+   }
+  }
+  &__chosen-model{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  &__message {
+    position: absolute;
+    bottom: 10px;
+    padding: 0 20px;
+    width: 100%;
+    text-align: center;
+    left:0;
+    color: #fff;
+    display:block;
+    font-size: 1.3rem;
+  }
+}
+
+.datepicker-date-display{
+  background-color: #d9142b;
+}
+
+.datepicker-day-button {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.datepicker-table td.is-today {
+  color: #d9142b;
+}
+
+.datepicker-table .is-disabled.is-today {
+  color: rgba(#000,0.3);
+}
+
+.datepicker-table td.is-selected {
+  background-color: #d9142b;
+  color: #fff;
+}
+
+.datepicker-day-button:focus {
+  background-color: rgba(#d9142b, 0.25);
+}
+
+.datepicker-controls .select-month input {
+  width: 75px;
+}
+
+.datepicker-cancel, .datepicker-today, .datepicker-done {
+color: #d9142b;
+}
+
+.datepicker-clear {
+  color: #000;
+}
+
+textarea::-webkit-scrollbar {
+  width: 1rem;  
+}
+
+textarea::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  border-radius: 10px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+

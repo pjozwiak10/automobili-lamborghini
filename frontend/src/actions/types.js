@@ -1,0 +1,11 @@
+export const STOP_HOME_ANIMATION = 'STOP_HOME_ANIMATION';
+
+export const CONFIRM_CONFIGURATION = 'CONFIRM_CONFIGURATION';
+export const DELETE_CONFIGURATION = 'DELETE_CONFIGURATION';
+
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const LOGOUT = 'LOGOUT';
+export const AUTH_ERROR = 'AUTH_ERROR';
+export const AUTH_SUCCESS = 'AUTH_SUCCESS';
+export const ADD_CAR = 'ADD_CAR';
