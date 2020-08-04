@@ -317,11 +317,11 @@ const Configurator = ({ user, configurator, selectedModel, handleRippleEffect, c
       <Confirmation handleRippleEffect={handleRippleEffect} configuredModel={configuredModel} handleConfigurationList={handleConfigurationList} configurationConfirmation={configurationConfirmation} />
       <Parameters selectedModel={selectedModel} parameterState={parameterState} handleModel3D={handleModel3D} hideParametersValue={hideParametersValue} handleParametersValue={handleParametersValue} handleOptionsCar={handleOptionsCar} />
       <div className="customisations__model-container" ref={canvasContainerRef}>
-        {selectedModel === 'aventador' && < AventadorModel canvasContainerRef={canvasContainerRef} carChanges={carChanges} />}
-        {selectedModel === 'huracan' && < HuracanModel canvasContainerRef={canvasContainerRef} carChanges={carChanges} />}
-        {selectedModel === 'urus' && < UrusModel canvasContainerRef={canvasContainerRef} carChanges={carChanges} />}
-        {selectedModel === 'gallardo' && < GallardoModel canvasContainerRef={canvasContainerRef} carChanges={carChanges} />}
-        {selectedModel === 'murcielago' && < MurcielagoModel canvasContainerRef={canvasContainerRef} carChanges={carChanges} />}
+        {selectedModel === 'aventador' && <AventadorModel canvasContainerRef={canvasContainerRef} carChanges={carChanges} />}
+        {selectedModel === 'huracan' && <HuracanModel canvasContainerRef={canvasContainerRef} carChanges={carChanges} />}
+        {selectedModel === 'urus' && <UrusModel canvasContainerRef={canvasContainerRef} carChanges={carChanges} />}
+        {selectedModel === 'gallardo' && <GallardoModel canvasContainerRef={canvasContainerRef} carChanges={carChanges} />}
+        {selectedModel === 'murcielago' && <MurcielagoModel canvasContainerRef={canvasContainerRef} carChanges={carChanges} />}
       </div>
       {redirectToHome && <Redirect to="/" />}
     </div>

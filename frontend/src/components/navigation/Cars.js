@@ -22,6 +22,7 @@ const Cars = memo(({ user, cars, configurator, dimensions }) => {
   const mediaToChangeAnimation = useMediaQuery({ query: '(min-width: 1024px)' });
 
   useEffect(() => {
+    document.querySelector('.cars-container').style.height = window.innerHeight;
     // eslint-disable-next-line
     swiper.current = new Swiper('.cars__swiper-container', {
       direction: 'vertical',
