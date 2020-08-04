@@ -64,43 +64,6 @@ const TestRide = () => {
     instancesDate.doneBtn.onclick = doneDate;
   })
 
-  useEffect(() => {
-    if (isTablet) {
-      const createBlotter = () => {
-        const pTagList = document.querySelectorAll('.test-ride__chosen-model');
-        if (!pTagList.length) return;
-        const namesCars = ['Huracan', 'Aventador', 'Gallardo', 'Murcielago', 'Urus'];
-        const cars = namesCars.map((car, i) => (
-          {
-            name: car,
-            element: pTagList[i],
-          }
-        ))
-        cars.forEach(car => {
-          const text = new window.Blotter.Text(car.name, {
-            family: 'Montserrat',
-            weight: 700,
-            size: isDesktop ? 64 : (isLaptop ? 32 : 48),
-            fill: '#fff',
-          })
-          const material = new window.Blotter.RollingDistortMaterial();
-          material.uniforms.uSineDistortAmplitude.value = 0.01;
-          material.uniforms.uSineDistortSpread.value = 0.75;
-          material.uniforms.uSineDistortCycleCount.value = 0.75;
-
-          const blotter = new window.Blotter(material, {
-            texts: text,
-          })
-          const scope = blotter.forText(text);
-          scope.appendTo(car.element);
-        })
-      }
-      setTimeout(() => {
-        createBlotter();
-      }, 100)
-    }
-  }, [isTablet, isDesktop, isLaptop])
-
   const clearDate = () => {
     dateToConfirm.current = null
     setText({

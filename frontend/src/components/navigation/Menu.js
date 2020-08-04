@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, memo } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import gsap from 'gsap';
 import { useMediaQuery } from 'react-responsive';
@@ -13,7 +13,7 @@ import franceFlag from '../../images/countries/france-flag.svg';
 import spainFlag from '../../images/countries/spain-flag.svg';
 import germanyFlag from '../../images/countries/germany-flag.svg';
 
-const Menu = ({ menu, toggleMenu, history, dimensions }) => {
+const Menu = memo(({ menu, toggleMenu, history, dimensions }) => {
   const isDesktopOrLaptop = useMediaQuery({ query: '(min-width: 1024px)' });
 
   const isAboveWrapper = useMediaQuery({ query: '(min-width: 1440px)' });
@@ -102,7 +102,7 @@ const Menu = ({ menu, toggleMenu, history, dimensions }) => {
           x: 100,
           stagger: 0.2,
         }, '-=1')
-    } else if (!menu) {
+    } else if (!menu && menu !== null) {
       menuTl.to([menuBg, menuBgAdditional], {
         duration: 0.8,
         height: 0,
@@ -250,6 +250,6 @@ const Menu = ({ menu, toggleMenu, history, dimensions }) => {
       </div>
     </>
   );
-}
+});
 
 export default withRouter(Menu);

@@ -10,11 +10,11 @@ const CarAnimation = () => {
   return (
     <>
       <div className="test-ride__chosen-model-container">
-        <p className="test-ride__chosen-model huracan"></p>
-        <p className="test-ride__chosen-model aventador"></p>
-        <p className="test-ride__chosen-model gallardo"></p>
-        <p className="test-ride__chosen-model murcielago"></p>
-        <p className="test-ride__chosen-model urus"></p>
+        <p className="test-ride__chosen-model huracan">Huracan</p>
+        <p className="test-ride__chosen-model aventador">Aventador</p>
+        <p className="test-ride__chosen-model gallardo">Gallardo</p>
+        <p className="test-ride__chosen-model murcielago">Murcielago</p>
+        <p className="test-ride__chosen-model urus">Urus</p>
       </div>
       <div className="test-ride__chosen-image-container">
         <img src={huracan} alt="huracan" className="test-ride__chosen-image huracan" />

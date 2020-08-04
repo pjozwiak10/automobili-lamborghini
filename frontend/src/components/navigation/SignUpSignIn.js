@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import gsap from 'gsap';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { login } from '../../actions/userActions';
 
-const SignUpSignIn = ({ toggleSign, sign, login, user }) => {
+const SignUpSignIn = memo(({ toggleSign, sign, login, user }) => {
   const [signUpActive, setSignUpActive] = useState(false);
   const [userData, setUserData] = useState({ login: { email: '', password: '' }, register: { name: '', email: '', password: '' } });
   const [errorMsg, setErrorMsg] = useState('');
@@ -25,7 +25,7 @@ const SignUpSignIn = ({ toggleSign, sign, login, user }) => {
           duration: 0.5,
           x: 0,
         }, '-=0.2')
-    } else if (!sign) {
+    } else if (!sign && sign !== null) {
       tl.to('.container', {
         duration: 0.5,
         x: '100vw',
@@ -55,11 +55,11 @@ const SignUpSignIn = ({ toggleSign, sign, login, user }) => {
 
   useEffect(() => {
     setErrorMsg(user.msg)
-    if (user.isAuthenticated) {
+    if (user.isAuthenticated && sign) {
       setSuccessMsg('Login successfull')
       setTimeout(() => { toggleSign(false); setSuccessMsg('') }, 1000)
     }
-  }, [user, toggleSign])
+  }, [user, toggleSign, sign])
 
   const handleInput = (e) => {
     const id = e.target.dataset.id;
@@ -187,7 +187,7 @@ const SignUpSignIn = ({ toggleSign, sign, login, user }) => {
       </div>
     </div>
   );
-}
+});
 
 const mapDispatchToProps = {
   login

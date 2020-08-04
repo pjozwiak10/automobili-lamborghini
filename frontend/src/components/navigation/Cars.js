@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive'
 import gsap from 'gsap';
@@ -10,7 +10,7 @@ import urus from '../../images/cars/urus.jpg';
 import gallardo from '../../images/cars/gallardo.jpg';
 import murcielago from '../../images/cars/murcielago.jpg';
 
-const Cars = ({ user, cars, configurator, dimensions }) => {
+const Cars = memo(({ user, cars, configurator, dimensions }) => {
   const initialHeightCard = useRef(null);
   const imageCars = { huracan, aventador, urus, gallardo, murcielago };
   const swiper = useRef(null);
@@ -58,7 +58,7 @@ const Cars = ({ user, cars, configurator, dimensions }) => {
             duration: 0.5,
             right: 15,
           }, '-=0.5')
-        } else {
+        } else if (!cars && cars !== null) {
           carsTl.to('.cars__pagination', {
             duration: 0.5,
             right: -15,
@@ -98,7 +98,7 @@ const Cars = ({ user, cars, configurator, dimensions }) => {
             duration: 0.4,
             opacity: 1,
           })
-        } else {
+        } else if (!cars && cars !== null) {
           carsTl.to('.cars__empty', {
             duration: 0.4,
             opacity: 0,
@@ -264,7 +264,7 @@ const Cars = ({ user, cars, configurator, dimensions }) => {
       </div>
     </div>
   );
-}
+});
 
 const mapStateToProps = (state) => ({
   user: state.user,

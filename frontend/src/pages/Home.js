@@ -24,6 +24,11 @@ const Home = ({ stopAniHome, animation, dimensions }) => {
   }, [dimensions.height, isDesktopOrLaptop]);
 
   useEffect(() => {
+    const i = Swiper.prototype.init;
+    Swiper.prototype.init = function () {
+      this.touchEventsData.formElements = '*';
+      i.call(this);
+    };
     // eslint-disable-next-line
     swiper.current = new Swiper('.swiper-container-home', {
       pagination: {
@@ -97,57 +102,20 @@ const Home = ({ stopAniHome, animation, dimensions }) => {
       }
       stopAniHome();
     }
-    window.addEventListener('mouseup', changeText)
-    window.addEventListener('touchend', changeText)
+    document.querySelector('.swiper-container-home').addEventListener('mouseup', changeText)
+    document.querySelector('.swiper-container-home').addEventListener('touchend', changeText)
 
     return () => {
-      window.removeEventListener('mouseup', changeText)
-      window.removeEventListener('touchend', changeText)
+      document.querySelector('.swiper-container-home').removeEventListener('mouseup', changeText)
+      document.querySelector('.swiper-container-home').removeEventListener('touchend', changeText)
     }
 
   }, [animation, stopAniHome, isDesktopOrLaptop]);
 
-  useEffect(() => {
-
-    const createBlotter = () => {
-      const pTagList = document.querySelectorAll('.home__model-car');
-      const namesCars = ['HURACAN', 'GALLARDO', 'AVENTADOR', 'MURCIELAGO', 'URUS'];
-      const cars = namesCars.map((car, i) => (
-        {
-          name: car,
-          element: pTagList[i],
-        }
-      ))
-      cars.forEach(car => {
-        const text = new window.Blotter.Text(car.name, {
-          family: 'Montserrat',
-          weight: 700,
-          size: 24,
-          fill: '#fff',
-          paddingLeft: 5,
-          paddingRight: 5,
-        })
-        const material = new window.Blotter.RollingDistortMaterial();
-        material.uniforms.uSineDistortAmplitude.value = 0.015;
-        material.uniforms.uSineDistortSpread.value = 0.75;
-        material.uniforms.uSineDistortCycleCount.value = 0.75;
-
-        const blotter = new window.Blotter(material, {
-          texts: text,
-        })
-        const scope = blotter.forText(text);
-        scope.appendTo(car.element);
-      })
-    }
-    setTimeout(() => {
-      createBlotter();
-    }, 100)
-  }, [])
-
   const changeText = () => {
     setTimeout(() => {
       if (!document.querySelector('.swiper-slide-active')) return
-      if (!document.querySelector('.home__model-car')) return
+      if (!document.querySelector('.home__model-car')) return;
       const currentMove = document.querySelector('.swiper-slide-active').dataset.move;
       gsap.to('.home__model-car', {
         duration: 0.4,
@@ -163,11 +131,11 @@ const Home = ({ stopAniHome, animation, dimensions }) => {
         <header className="home__header">
           <div className="home__model-car-container">
             <div className="home__model-car-moving">
-              <p className="home__model-car"></p>
-              <p className="home__model-car"></p>
-              <p className="home__model-car"></p>
-              <p className="home__model-car"></p>
-              <p className="home__model-car"></p>
+              <p className="home__model-car">Huracan</p>
+              <p className="home__model-car">Gallardo</p>
+              <p className="home__model-car">Aventador</p>
+              <p className="home__model-car">Murcielago</p>
+              <p className="home__model-car">Urus</p>
             </div>
           </div>
           <Link className="home__header-link" to="/test-ride">

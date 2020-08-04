@@ -13,10 +13,10 @@ import { deleteConfiguration } from '../actions/configuratorActions';
 const Navigation = ({ user, logout, history, deleteConfiguration, dimensions }) => {
   const isDesktopOrLaptop = useMediaQuery({ query: '(min-width: 1024px)' })
 
-  const [menu, toggleMenu] = useState(false);
+  const [menu, toggleMenu] = useState(null);
   const [disabledMenuBtn, setDisabledMenuBtn] = useState(true);
-  const [sign, toggleSign] = useState(false);
-  const [cars, toggleCars] = useState(false);
+  const [sign, toggleSign] = useState(null);
+  const [cars, toggleCars] = useState(null);
 
   useEffect(() => {
     history.listen(() => {
