@@ -137,10 +137,10 @@ const Navigation = ({ user, logout, history, deleteConfiguration, dimensions }) 
 
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback>
         <Menu menu={menu} toggleMenu={toggleMenu} dimensions={dimensions} />
-        {user.isAuthenticated ? <Cars cars={cars} dimensions={dimensions} /> : null}
         <SignUpSignIn toggleSign={toggleSign} sign={sign} />
+        {user.isAuthenticated ? <Cars cars={cars} dimensions={dimensions} /> : null}
       </Suspense>
       <nav className="navigation">
         <div className="navigation__inner">
