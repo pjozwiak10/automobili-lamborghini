@@ -1,14 +1,14 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, Suspense, lazy } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import logo from '../images/logo/lamborghini.svg';
 import gsap from 'gsap';
-import Menu from '../components/navigation/Menu';
-import SignUpSignIn from '../components/navigation/SignUpSignIn';
-import Cars from '../components/navigation/Cars';
 import { connect } from 'react-redux';
 import { logout } from '../actions/userActions';
 import { deleteConfiguration } from '../actions/configuratorActions';
+const Cars = lazy(() => import('../components/navigation/Cars'));
+const Menu = lazy(() => import('../components/navigation/Menu'));
+const SignUpSignIn = lazy(() => import('../components/navigation/SignUpSignIn'));
 
 const Navigation = ({ user, logout, history, deleteConfiguration, dimensions }) => {
   const isDesktopOrLaptop = useMediaQuery({ query: '(min-width: 1024px)' })
@@ -137,9 +137,11 @@ const Navigation = ({ user, logout, history, deleteConfiguration, dimensions }) 
 
   return (
     <>
-      <SignUpSignIn toggleSign={toggleSign} sign={sign} />
-      <Menu menu={menu} toggleMenu={toggleMenu} dimensions={dimensions} />
-      {user.isAuthenticated ? <Cars cars={cars} dimensions={dimensions} /> : null}
+      <Suspense fallback={<div>Loading...</div>}>
+        <Menu menu={menu} toggleMenu={toggleMenu} dimensions={dimensions} />
+        {user.isAuthenticated ? <Cars cars={cars} dimensions={dimensions} /> : null}
+        <SignUpSignIn toggleSign={toggleSign} sign={sign} />
+      </Suspense>
       <nav className="navigation">
         <div className="navigation__inner">
           <div className="navigation__logo-container">

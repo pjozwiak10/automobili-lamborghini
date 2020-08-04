@@ -42,7 +42,7 @@ const SignUpSignIn = memo(({ toggleSign, sign, login, user }) => {
   }, [sign, toggleSign, signUpActive]);
 
   useEffect(() => {
-    setErrorMsg(user.msg)
+    setErrorMsg(user.msg);
     if (user.isAuthenticated && sign) {
       setSuccessMsg('Login successfull')
       setTimeout(() => { toggleSign(false); setSuccessMsg('') }, 1000)
@@ -82,7 +82,6 @@ const SignUpSignIn = memo(({ toggleSign, sign, login, user }) => {
       password: userData.login.password,
     };
     login(loginData)
-
     setUserData({ login: { email: '', password: '' }, register: { name: '', email: '', password: '' } })
     Array(...e.target.elements).forEach(el => { el.classList.remove('valid') });
   }, [login, userData.login.email, userData.login.password]);
