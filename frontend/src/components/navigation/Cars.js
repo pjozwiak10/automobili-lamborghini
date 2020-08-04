@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, memo } from 'react';
+import React, { useEffect, useRef, useState, memo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive'
 import gsap from 'gsap';
@@ -111,7 +111,7 @@ const Cars = memo(({ user, cars, configurator, dimensions }) => {
     }
   }, [cars, user.cars, mediaToChangeAnimation])
 
-  const handleCard = (e) => {
+  const handleCard = useCallback((e) => {
     if (disabled) return;
     setDisabled(true);
     setTimeout(() => setDisabled(false), 500)
@@ -179,11 +179,11 @@ const Cars = memo(({ user, cars, configurator, dimensions }) => {
         }
         break;
     }
-  }
+  }, [disabled, mediaToChangeAnimation]);
 
-  const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
+  const capitalize = useCallback(s => s.charAt(0).toUpperCase() + s.slice(1), []);
 
-  const handleInfoCreated = () => {
+  const handleInfoCreated = useCallback(() => {
     const infoHeight = document.querySelector('.cars__info-message').getBoundingClientRect().height;
     switch (infoHeight > 0) {
       case false:
@@ -208,9 +208,9 @@ const Cars = memo(({ user, cars, configurator, dimensions }) => {
         })
         break;
     }
-  }
+  }, [])
 
-  const buildCards = () => {
+  const buildCards = useCallback(() => {
     const numberOfElements = isDesktopOrLaptop ? 3 : (isTablet ? 2 : 1);
     const numberOfSlides = Math.ceil(user.cars.length / numberOfElements);
     return Array(numberOfSlides).fill('').map((slide, iSlide) => (
@@ -252,7 +252,7 @@ const Cars = memo(({ user, cars, configurator, dimensions }) => {
           : null)}
       </div>
     ))
-  }
+  }, [capitalize, configurator.model, handleCard, handleInfoCreated, imageCars, isDesktopOrLaptop, isTablet, user.cars]);
 
   return (
     <div className="cars-container cars">

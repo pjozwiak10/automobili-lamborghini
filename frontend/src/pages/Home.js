@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
@@ -102,17 +102,10 @@ const Home = ({ stopAniHome, animation, dimensions }) => {
       }
       stopAniHome();
     }
-    document.querySelector('.swiper-container-home').addEventListener('mouseup', changeText)
-    document.querySelector('.swiper-container-home').addEventListener('touchend', changeText)
-
-    return () => {
-      document.querySelector('.swiper-container-home').removeEventListener('mouseup', changeText)
-      document.querySelector('.swiper-container-home').removeEventListener('touchend', changeText)
-    }
 
   }, [animation, stopAniHome, isDesktopOrLaptop]);
 
-  const changeText = () => {
+  const changeText = useCallback(() => {
     setTimeout(() => {
       if (!document.querySelector('.swiper-slide-active')) return
       if (!document.querySelector('.home__model-car')) return;
@@ -122,7 +115,17 @@ const Home = ({ stopAniHome, animation, dimensions }) => {
         y: currentMove,
       })
     }, 400)
-  }
+  }, [])
+
+  useEffect(() => {
+    document.querySelector('.swiper-container-home').addEventListener('mouseup', changeText)
+    document.querySelector('.swiper-container-home').addEventListener('touchend', changeText)
+
+    return () => {
+      document.querySelector('.swiper-container-home').removeEventListener('mouseup', changeText)
+      document.querySelector('.swiper-container-home').removeEventListener('touchend', changeText)
+    }
+  }, [changeText])
 
   return (
     <>

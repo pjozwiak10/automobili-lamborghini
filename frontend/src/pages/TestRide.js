@@ -10,8 +10,6 @@ import CarAnimation from '../components/test-ride/CarAnimation';
 
 const TestRide = () => {
   const isTablet = useMediaQuery({ query: '(min-width: 768px)' });
-  const isLaptop = useMediaQuery({ query: '(min-width: 1024px)' });
-  const isDesktop = useMediaQuery({ query: '(min-width: 1280px)' });
 
   const [checkbox, setCheckbox] = useState([
     { name: 'huracan', checked: false, group: 'model' },

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import logo from '../images/logo/lamborghini.svg';
@@ -19,10 +19,14 @@ const Navigation = ({ user, logout, history, deleteConfiguration, dimensions }) 
   const [cars, toggleCars] = useState(null);
 
   useEffect(() => {
-    history.listen(() => {
-      toggleCars(false)
-    })
+    if (cars) {
+      history.listen(() => {
+        toggleCars(false)
+      })
+    }
+  }, [cars, history])
 
+  useEffect(() => {
     if (user.isAuthenticated) {
       gsap.to('.navigation__button-container.--cars', {
         duration: 0,
@@ -40,7 +44,7 @@ const Navigation = ({ user, logout, history, deleteConfiguration, dimensions }) 
         delay: 1.4,
       })
     }
-  }, [user.isAuthenticated, history])
+  }, [user.isAuthenticated])
 
   useEffect(() => {
 
@@ -109,27 +113,27 @@ const Navigation = ({ user, logout, history, deleteConfiguration, dimensions }) 
     }
   }, [isDesktopOrLaptop])
 
-  const handleMenu = () => {
+  const handleMenu = useCallback(() => {
     toggleMenu(!menu)
     setDisabledMenuBtn(true)
     setTimeout(() => {
       setDisabledMenuBtn(false)
     }, 900)
-  }
+  }, [menu])
 
-  const handleCars = () => {
+  const handleCars = useCallback(() => {
     toggleCars(!cars)
     setDisabledMenuBtn(true)
     setTimeout(() => {
       setDisabledMenuBtn(false)
     }, 900)
-  }
+  }, [cars]);
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     logout();
     toggleCars(false);
     deleteConfiguration();
-  }
+  }, [deleteConfiguration, logout])
 
   return (
     <>

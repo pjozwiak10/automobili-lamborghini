@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, useEffect, memo, useCallback } from 'react';
 import gsap from 'gsap';
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -39,19 +39,7 @@ const SignUpSignIn = memo(({ toggleSign, sign, login, user }) => {
           zIndex: -10,
         })
     }
-
-    const closePanel = (e) => {
-      if (e.keyCode === 13 && sign && !signUpActive) document.querySelector('button.sign-in').focus()
-      if (e.keyCode === 13 && sign && signUpActive) document.querySelector('button.sign-up').focus()
-      if (e.keyCode === 27 && sign) toggleSign(false)
-    }
-    window.addEventListener('keydown', closePanel)
-
-    return () => {
-      window.removeEventListener('keydown', closePanel)
-    }
-
-  }, [sign, toggleSign, signUpActive])
+  }, [sign, toggleSign, signUpActive]);
 
   useEffect(() => {
     setErrorMsg(user.msg)
@@ -59,9 +47,22 @@ const SignUpSignIn = memo(({ toggleSign, sign, login, user }) => {
       setSuccessMsg('Login successfull')
       setTimeout(() => { toggleSign(false); setSuccessMsg('') }, 1000)
     }
-  }, [user, toggleSign, sign])
+  }, [user, toggleSign, sign]);
 
-  const handleInput = (e) => {
+  const closePanel = useCallback((e) => {
+    if (e.keyCode === 13 && sign && !signUpActive) document.querySelector('button.sign-in').focus()
+    if (e.keyCode === 13 && sign && signUpActive) document.querySelector('button.sign-up').focus()
+    if (e.keyCode === 27 && sign) toggleSign(false)
+  }, [sign, signUpActive, toggleSign]);
+
+  useEffect(() => {
+    window.addEventListener('keydown', closePanel)
+    return () => {
+      window.removeEventListener('keydown', closePanel)
+    }
+  }, [closePanel]);
+
+  const handleInput = useCallback((e) => {
     const id = e.target.dataset.id;
     const name = e.target.name;
     const value = e.target.value;
@@ -71,9 +72,9 @@ const SignUpSignIn = memo(({ toggleSign, sign, login, user }) => {
     }));
     if (value) e.target.classList.add('valid');
     else e.target.classList.remove('valid');
-  }
+  }, [])
 
-  const handleSubmitLogin = (e) => {
+  const handleSubmitLogin = useCallback((e) => {
     e.preventDefault();
     if (!userData.login.email || !userData.login.password) return setErrorMsg('Please enter all fields');
     const loginData = {
@@ -84,9 +85,9 @@ const SignUpSignIn = memo(({ toggleSign, sign, login, user }) => {
 
     setUserData({ login: { email: '', password: '' }, register: { name: '', email: '', password: '' } })
     Array(...e.target.elements).forEach(el => { el.classList.remove('valid') });
-  }
+  }, [login, userData.login.email, userData.login.password]);
 
-  const handleSubmitRegister = (e) => {
+  const handleSubmitRegister = useCallback((e) => {
     e.preventDefault();
     if (!userData.register.name || !userData.register.email || !userData.register.password) return setErrorMsg('Please enter all fields');
     const registrationData = {
@@ -105,7 +106,7 @@ const SignUpSignIn = memo(({ toggleSign, sign, login, user }) => {
       .catch(err => {
         setErrorMsg(err.response.data.msg);
       })
-  }
+  }, [userData.register.email, userData.register.name, userData.register.password]);
 
   return (
     <div className="container-panel">

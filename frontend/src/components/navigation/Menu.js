@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, memo } from 'react';
+import React, { useEffect, useRef, memo, useCallback } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import gsap from 'gsap';
 import { useMediaQuery } from 'react-responsive';
@@ -113,7 +113,7 @@ const Menu = memo(({ menu, toggleMenu, history, dimensions }) => {
 
   }, [menu, history, toggleMenu, isDesktopOrLaptop])
 
-  const handleHover = (e) => {
+  const handleHover = useCallback((e) => {
     gsap.to(e.target, {
       duration: 0.4,
       y: 3,
@@ -121,9 +121,9 @@ const Menu = memo(({ menu, toggleMenu, history, dimensions }) => {
       ease: 'power3.inOut',
       color: '#BE0921',
     })
-  }
+  }, [])
 
-  const handleHoverOut = (e) => {
+  const handleHoverOut = useCallback((e) => {
     gsap.to(e.target, {
       duration: 0.4,
       y: -3,
@@ -131,9 +131,9 @@ const Menu = memo(({ menu, toggleMenu, history, dimensions }) => {
       ease: 'power3.inOut',
       color: '#000',
     })
-  }
+  }, [])
 
-  const showCountry = (e) => {
+  const showCountry = useCallback((e) => {
     const id = e.target.dataset.id;
     const country = countries.filter(country => country.name === id)[0].img;
     if (!isDesktopOrLaptop) {
@@ -167,9 +167,9 @@ const Menu = memo(({ menu, toggleMenu, history, dimensions }) => {
       mixBlendMode: 'difference',
       color: '#fff',
     })
-  }
+  }, [countries, isDesktopOrLaptop]);
 
-  const hideCountry = (e) => {
+  const hideCountry = useCallback((e) => {
     if (!isDesktopOrLaptop) {
       const elementsToVisible = [...e.target.parentNode.children]
       gsap.to(elementsToVisible, {
@@ -192,7 +192,7 @@ const Menu = memo(({ menu, toggleMenu, history, dimensions }) => {
       mixBlendMode: 'normal',
       color: '#000',
     })
-  }
+  }, [isDesktopOrLaptop]);
 
   return (
     <>
