@@ -12,3 +12,5 @@ Technologies that have been used:</br>
 -NodeJS</br>
 -MongoDB</br>
 -Express</br>
+-ThreeJS</br>
+-GSAP</br>
