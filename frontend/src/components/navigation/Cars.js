@@ -40,7 +40,7 @@ const Cars = memo(({ user, cars, configurator, dimensions }) => {
     }
   }, [user.cars.length]);
   useEffect(() => {
-    gsap.to('.cars-container', { duration: 0, height: mediaToChangeAnimation ? dimensions.height : dimensions.height - 60 });
+    gsap.to('.cars-container', { duration: 0, height: mediaToChangeAnimation ? window.innerHeight : window.innerHeight - 60 });
     gsap.to('.cars__swiper-slide', { duration: 0, height: mediaToChangeAnimation ? dimensions.height : dimensions.height - 60 });
   }, [mediaToChangeAnimation, dimensions.height])
   useEffect(() => {
