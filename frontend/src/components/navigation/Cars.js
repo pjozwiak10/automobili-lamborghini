@@ -22,10 +22,6 @@ const Cars = memo(({ user, cars, configurator, dimensions }) => {
   const mediaToChangeAnimation = useMediaQuery({ query: '(min-width: 1024px)' });
 
   useEffect(() => {
-    if (!isTablet) document.querySelector('.cars-container').style = `height:${window.innerHeight - 60}px`;
-  }, [isTablet])
-
-  useEffect(() => {
     // eslint-disable-next-line
     swiper.current = new Swiper('.cars__swiper-container', {
       direction: 'vertical',
@@ -44,6 +40,7 @@ const Cars = memo(({ user, cars, configurator, dimensions }) => {
     }
   }, [user.cars.length]);
   useEffect(() => {
+    gsap.to('.cars-container', { duration: 0, height: mediaToChangeAnimation ? dimensions.height : dimensions.height - 60 });
     gsap.to('.cars__swiper-slide', { duration: 0, height: mediaToChangeAnimation ? dimensions.height : dimensions.height - 60 });
   }, [mediaToChangeAnimation, dimensions.height])
   useEffect(() => {

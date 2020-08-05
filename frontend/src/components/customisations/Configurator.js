@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, memo, useCallback } from 'react';
 import { Redirect } from 'react-router-dom';
 import gsap from 'gsap';
 import { parametersData } from '../../data/customisations/configurator';
@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import { confirmConfiguration } from '../../actions/configuratorActions';
 import { addCar } from '../../actions/userActions';
 
-const Configurator = ({ user, configurator, selectedModel, handleRippleEffect, confirmConfiguration, addCar }) => {
+const Configurator = memo(({ user, configurator, selectedModel, handleRippleEffect, confirmConfiguration, addCar }) => {
   const isLaptop = useMediaQuery({ query: '(min-width: 1024px)' });
 
   const canvasContainerRef = useRef(null);
@@ -43,7 +43,7 @@ const Configurator = ({ user, configurator, selectedModel, handleRippleEffect, c
     }))
   }, [selectedModel, configurator])
 
-  const backToSelectModel = () => {
+  const backToSelectModel = useCallback(() => {
     if (disabledButton) return;
     gsap.to('.customisations__configurator', {
       duration: 0,
@@ -74,9 +74,9 @@ const Configurator = ({ user, configurator, selectedModel, handleRippleEffect, c
       gsap.to(`.customisations__hover-text`, { duration: 0.3, opacity: 0, });
     }
     setCarChanges({ parameter: null, value: null });
-  }
+  }, [configurator, disabledButton, isLaptop]);
 
-  const setConfirmElement = (parameter) => {
+  const setConfirmElement = useCallback((parameter) => {
     const topViewElements = [...parameterValueContainer.current];
     switch (parameter) {
       case 'top view':
@@ -96,9 +96,9 @@ const Configurator = ({ user, configurator, selectedModel, handleRippleEffect, c
       default:
         return null;
     }
-  }
+  }, [configuredModel]);
 
-  const handleParametersValue = (e) => {
+  const handleParametersValue = useCallback((e) => {
     if (disabledButton) return;
     setDisabledButton(true);
     setTimeout(() => {
@@ -151,9 +151,9 @@ const Configurator = ({ user, configurator, selectedModel, handleRippleEffect, c
         setTimeout(() => setConfirmElement(parameter), 1100)
       }
     }
-  }
+  }, [disabledButton, isLaptop, parameterState, setConfirmElement]);
 
-  const hideParametersValue = () => {
+  const hideParametersValue = useCallback(() => {
     gsap.to('.customisations__selected-parameter', {
       duration: 1,
       x: isLaptop ? '-150%' : 0,
@@ -164,9 +164,9 @@ const Configurator = ({ user, configurator, selectedModel, handleRippleEffect, c
       gsap.to(`.customisations__hover-background`, { duration: 0.3, height: '5%' });
       gsap.to(`.customisations__hover-text`, { duration: 0.3, opacity: 0, });
     }
-  }
+  }, [isLaptop]);
 
-  const handleModel3D = (id) => {
+  const handleModel3D = useCallback((id) => {
     const parameter = parameterState.parameter;
     const value = parameterState.values.filter(el => el.id === id)[0];
     setCarChanges({
@@ -177,9 +177,9 @@ const Configurator = ({ user, configurator, selectedModel, handleRippleEffect, c
       ...configuredModel,
       [parameter]: { name: value.name, color: value.color },
     })
-  }
+  }, [configuredModel, parameterState.parameter, parameterState.values]);
 
-  const handleOptionsCar = (e, id) => {
+  const handleOptionsCar = useCallback((e, id) => {
     switch (parameterState.parameter) {
       case 'top view':
         const value = parameterState.values.filter(el => el.id === id)[0];
@@ -234,9 +234,9 @@ const Configurator = ({ user, configurator, selectedModel, handleRippleEffect, c
       default:
         return null;
     }
-  }
+  }, [configuredModel, parameterState.parameter, parameterState.values]);
 
-  const handleConfigurationList = (e) => {
+  const handleConfigurationList = useCallback((e) => {
     if (disabledButton) return;
     setDisabledButton(true);
     setTimeout(() => {
@@ -271,9 +271,9 @@ const Configurator = ({ user, configurator, selectedModel, handleRippleEffect, c
       default:
         return;
     }
-  }
+  }, [configListToggle, disabledButton]);
 
-  const configurationConfirmation = (configuredModel) => {
+  const configurationConfirmation = useCallback((configuredModel) => {
     if (disabledButton && !isLaptop) return;
     confirmConfiguration(configuredModel);
     addCar({ ...configuredModel, userId: user.personal._id })
@@ -309,7 +309,7 @@ const Configurator = ({ user, configurator, selectedModel, handleRippleEffect, c
       gsap.to(`.customisations__hover-background`, { duration: 0.3, height: '5%' });
       gsap.to(`.customisations__hover-text`, { duration: 0.3, opacity: 0, });
     }
-  }
+  }, [addCar, confirmConfiguration, disabledButton, isLaptop, user.personal._id]);
 
   return (
     <div className="customisations__configurator" ref={configurator}>
@@ -326,7 +326,7 @@ const Configurator = ({ user, configurator, selectedModel, handleRippleEffect, c
       {redirectToHome && <Redirect to="/" />}
     </div>
   );
-}
+});
 
 const mapDispatchToProps = {
   confirmConfiguration,

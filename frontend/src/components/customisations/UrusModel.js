@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, memo } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import urusModel from '../../models3d/urus/scene.glb';
 
-const UrusModel = ({ canvasContainerRef, carChanges }) => {
+const UrusModel = memo(({ canvasContainerRef, carChanges }) => {
   const isLaptop = useMediaQuery({ query: '(min-width: 1024px)' });
   const isDesktop = useMediaQuery({ query: '(min-width: 1280px)' });
   let theModel = useRef(null);
@@ -136,6 +136,6 @@ const UrusModel = ({ canvasContainerRef, carChanges }) => {
   return (
     <canvas id="c"></canvas>
   );
-}
+});
 
 export default UrusModel;

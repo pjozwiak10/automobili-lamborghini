@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-const Confirmation = ({ handleRippleEffect, configuredModel, handleConfigurationList, configurationConfirmation }) => {
+const Confirmation = memo(({ handleRippleEffect, configuredModel, handleConfigurationList, configurationConfirmation }) => {
 
   return (
     <div className="customisations__button-confirmation-container">
@@ -24,6 +24,6 @@ const Confirmation = ({ handleRippleEffect, configuredModel, handleConfiguration
       </div>}
     </div>
   );
-}
+});
 
 export default Confirmation;

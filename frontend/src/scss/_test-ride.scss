@@ -226,15 +226,13 @@
     position: relative;
     @media(min-width: 1024px) {
       width: auto;
-      height: 10%;
+      height: 30px;
       display: block;
       align-items: normal;
+      margin: 0 0 2rem 0;
     }
     @media(min-width: 1280px) {
-      height: 20%;
-    }
-    @media(min-width: 1280px) and (min-height: 900px) {
-      height: 15%;
+      margin: 0 0 4rem 0;
     }
   }
   &__chosen-image-container {
@@ -252,6 +250,7 @@
     }
     @media(min-width: 1280px) {
       align-items: flex-end;
+      height: 50%;
     }
     @media(min-width: 1280px) and (min-height: 900px) {
       height: 37.5%;
@@ -280,42 +279,42 @@
      height: 105%;
    }
    @media(min-width: 1024px) {
-     height: 60%;
-     margin-top: -25%;
+     height: 180px;
+     margin-top: -50px;
      &.aventador {
-       margin-top: -27.5%;
-       height: 60%;
+       margin-top: -50px;
+       height: 170px;
      }
      &.gallardo {
-       height: 50%;
-       margin-top: -10%;
+       height: 150px;
+       margin-top: -20px;
      }
      &.murcielago {
-       margin-top: -15%;
+       margin-top: -20px;
      }
      &.urus {
-       height: 55%;
-       margin-top: -15%;
+       height: 180px;
+       margin-top: -30px;
      }
    }
    @media(min-width: 1280px) {
-     margin-top: -20%;
-     height: 115%;
+     margin-top: -110px;
+     height: 340px;
      &.aventador {
-       margin-top: -25%;
-       height: 110%;
+       margin-top: -130px;
+       height: 320px;
      }
      &.murcielago {
-       margin-top: -7.5%;
+       margin-top: -65px;
      }
      &.gallardo {
-       height: 100%;
+       height: 280px;
        margin-left: -5%;
-       margin-top: -20%;
+       margin-top: -120px;
      }
      &.urus {
-       height: 100%;
-       margin-top: -20%;
+       height: 330px;
+       margin-top: -95px;
      }
    }
   }

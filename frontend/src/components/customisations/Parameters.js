@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import palette from '../../images/customisations/pantone.svg';
 import rim from '../../images/customisations/rim.svg';
 import roof from '../../images/customisations/roof.svg';
 import settings from '../../images/customisations/settings.svg';
 
-const Parameters = ({ selectedModel, parameterState, handleModel3D, hideParametersValue, handleParametersValue, handleOptionsCar }) => {
+const Parameters = memo(({ selectedModel, parameterState, handleModel3D, hideParametersValue, handleParametersValue, handleOptionsCar }) => {
   return (
     <div className="customisations__parameters">
       <div className="customisations__selected-parameter">
@@ -59,6 +59,6 @@ const Parameters = ({ selectedModel, parameterState, handleModel3D, hideParamete
       </div>
     </div>
   );
-}
+});
 
 export default Parameters;
