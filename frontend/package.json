@@ -20,7 +20,7 @@
     "redux-thunk": "^2.3.0",
     "simplebar": "^5.1.0",
     "swiper": "^5.4.5",
-    "three": "^0.114.0"
+    "three": "^0.125.0"
   },
   "scripts": {
     "start": "react-scripts start",
