@@ -19,7 +19,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "simplebar": "^5.1.0",
-    "swiper": "^5.4.5",
+    "swiper": "^6.5.1",
     "three": "^0.114.0"
   },
   "scripts": {
